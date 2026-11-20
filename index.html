@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-palette="synth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Rooms | Abhijith Giridhar</title>
+<meta name="description" content="Classroom escape rooms for grade 6 to 8. Pick a mission and play in the browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Same look as abhijithgiridhar.com: pixel grid, thick ink borders, hard offset shadows, mono labels, palette switcher. */
+:root,[data-palette=synth]{--bg:#3a1672;--grid:#ff78dc29;--ink:#fff3ff;--ink-soft:#e0b8ff;--card:#4a1f8f;--line:#ff78dc;--accent:#35f2ff;--c-games:#ff78dc;--c-installations:#35f2ff;--c-digital:#8dff9e;--c-hacks:#ffe45c;--on-color:#2a0d57}
+[data-palette=arcade]{--bg:#fff1c9;--grid:#1b13401a;--ink:#1b1340;--ink-soft:#4d4474;--card:#fffdf5;--line:#1b1340;--accent:#ff4f8b;--c-games:#ff6b9a;--c-installations:#5b8cff;--c-digital:#3ddc97;--c-hacks:#ffc233;--on-color:#1b1340}
+[data-palette=dmg]{--bg:#cfe09d;--grid:#0f380f24;--ink:#0f380f;--ink-soft:#306230;--card:#e4f0bd;--line:#0f380f;--accent:#306230;--c-games:#a6c24b;--c-installations:#8bac0f;--c-digital:#bcd470;--c-hacks:#f3f9b8;--on-color:#0f380f}
+[data-palette=blueprint]{--bg:#1f4fd8;--grid:#ffffff29;--ink:#f4f7ff;--ink-soft:#e8efff;--card:#2859e6;--line:#f4f7ff;--accent:#ffd447;--c-games:#ff8fb1;--c-installations:#9fe7ff;--c-digital:#8bf0c0;--c-hacks:#ffd447;--on-color:#0e2a82}
+:root{--display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;--mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark}
+[data-palette=arcade],[data-palette=dmg]{color-scheme:light}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:16px/1.55 var(--body);padding:0 max(24px,env(safe-area-inset-left,0px));-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{width:100%;max-width:72rem;margin:0 auto}
+header{position:sticky;top:0;z-index:40;border-bottom:2px solid var(--line);background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);margin:0 calc(-1*max(24px,env(safe-area-inset-left,0px)));padding:0 max(24px,env(safe-area-inset-left,0px))}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding:12px 0}
+.brand{font:800 1.25rem var(--display);letter-spacing:-.025em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand svg{width:28px;height:28px;flex:none}
+nav{display:flex;gap:4px;font:700 .875rem var(--mono);flex-wrap:wrap;align-items:center}
+nav a,nav button.pill{border:2px solid transparent;border-radius:999px;padding:4px 12px;text-decoration:none;background:none;color:inherit;font:inherit;cursor:pointer}
+nav a:hover,nav button.pill:hover{border-color:var(--line);background:var(--c-hacks);color:var(--on-color)}
+main{flex:1;width:100%;max-width:72rem;margin:0 auto;padding-bottom:56px}
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;padding:48px 0 40px;align-items:start}
+.eyebrow{font:400 .75rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font:800 clamp(2.6rem,7vw,4.5rem)/1 var(--display);letter-spacing:-.02em;margin:16px 0 20px;text-wrap:balance}
+.mark{background:var(--c-hacks);color:var(--on-color);padding:0 .15em}
+.lede{max-width:34rem;color:var(--ink-soft);font-size:1.125rem;margin:0 0 24px}
+.btns{display:flex;flex-wrap:wrap;gap:16px}
+.brutal{border:2px solid var(--line);box-shadow:5px 5px 0 var(--line);background:var(--card)}
+.brutal-sm{border:2px solid var(--line);box-shadow:3px 3px 0 var(--line)}
+.lift{transition:transform .15s var(--ease,ease),box-shadow .15s ease}
+@media (prefers-reduced-motion:no-preference){.lift:hover{transform:translate(-2px,-2px)}.lift:active{transform:translate(2px,2px)}}
+.lift.brutal:hover{box-shadow:7px 7px 0 var(--line)}
+.lift.brutal-sm:hover{box-shadow:5px 5px 0 var(--line)}
+.lift.brutal-sm:active{box-shadow:1px 1px 0 var(--line)}
+.btn{font:700 .875rem var(--mono);padding:10px 20px;color:var(--ink);background:var(--card);cursor:pointer;text-decoration:none;display:inline-block;border-radius:0}
+.btn.primary{background:var(--c-games);color:var(--on-color)}
+aside.inv{padding:20px}
+.inv-h{display:flex;justify-content:space-between;font:400 .75rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+.inv ul{list-style:none;margin:0;padding:0;font:400 .875rem var(--mono)}
+.inv li{display:flex;align-items:baseline;gap:8px;padding:5px 0}
+.inv li i{width:12px;height:12px;border:2px solid var(--line);flex:none;align-self:center}
+.inv li span.dots{flex:1;border-bottom:2px dotted var(--ink-soft);opacity:.6;transform:translateY(-3px)}
+.inv li b{font-weight:700}
+.inv hr{border:0;border-top:2px dashed var(--line);margin:14px 0}
+.inv p{margin:0;font:400 .75rem/1.5 var(--mono);color:var(--ink-soft)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin:8px 0 24px}
+h2{font:800 1.875rem/1.2 var(--display);margin:0;letter-spacing:-.01em}
+.sec-h .mono{font:700 .875rem var(--mono);color:var(--ink-soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:28px;list-style:none;padding:0;margin:0}
+.grid>li{display:flex}
+.card{display:flex;flex-direction:column;width:100%;color:inherit;text-decoration:none}
+.card header.band{position:static;margin:0;padding:8px 16px;border-bottom:2px solid var(--line);display:flex;justify-content:space-between;font:400 .6875rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-color);backdrop-filter:none}
+.card .body{display:flex;flex-direction:column;gap:12px;padding:16px;flex:1}
+.card h3{font:800 1.5rem/1.2 var(--display);letter-spacing:-.02em;margin:0}
+.card p{margin:0;font-size:.9375rem;line-height:1.4;color:var(--ink-soft)}
+.chips{list-style:none;margin:auto 0 0;padding:4px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{font:400 .6875rem var(--mono);border:2px solid var(--line);padding:1px 8px;text-transform:uppercase;letter-spacing:.05em}
+.diff{display:flex;align-items:center;gap:8px;font:400 .6875rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.pips{display:flex;gap:3px}
+.pips i{width:14px;height:10px;border:2px solid var(--line)}
+.pips i.on{background:var(--ink)}
+.play{border-top:2px solid var(--line);padding:10px 16px;font:700 .875rem var(--mono);display:flex;justify-content:space-between;background:var(--bg)}
+.how{margin-top:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.how .brutal{padding:20px}
+.how h3{font:800 1.25rem var(--display);margin:8px 0}
+.how p{margin:0;color:var(--ink-soft);font-size:.9375rem}
+.step{font:700 .75rem var(--mono);letter-spacing:.12em;color:var(--on-color);background:var(--c-digital);display:inline-block;padding:2px 8px;border:2px solid var(--line)}
+footer.site{border-top:2px solid var(--line);margin:0 calc(-1*max(24px,env(safe-area-inset-left,0px)));padding:20px max(24px,env(safe-area-inset-left,0px));font:400 .75rem var(--mono);color:var(--ink-soft)}
+footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#roll{min-height:1.5em}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding-top:32px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg aria-hidden="true" viewBox="0 0 32 32" shape-rendering="crispEdges"><rect x="2" y="2" width="28" height="28" fill="var(--c-games)" stroke="var(--line)" stroke-width="3"/><rect x="9" y="9" width="5" height="5" fill="var(--on-color)"/><rect x="18" y="9" width="5" height="5" fill="var(--on-color)"/><rect x="9" y="18" width="14" height="5" fill="var(--on-color)"/></svg>
+      Escape Rooms
+    </a>
+    <nav aria-label="Main">
+      <a href="#games">Games</a>
+      <a href="#how">How to play</a>
+      <button class="pill" id="palBtn" type="button" aria-label="Change colour palette">Palette: synth</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Player 1 · Classroom missions · LVL 6–8</div>
+      <h1>Pick a <span class="mark">mission</span> and escape.</h1>
+      <p class="lede">Four escape rooms for grade 6 to 8. Crack codes, spot scams, solve mysteries and race the clock. Everything runs in the browser, so any laptop works.</p>
+      <div class="btns">
+        <a class="btn brutal-sm lift primary" href="#games">▶ Choose a game_</a>
+        <button class="btn brutal-sm lift" id="rollBtn" type="button">⚄ Roll a d20</button>
+      </div>
+      <p class="eyebrow" id="roll" aria-live="polite" style="margin-top:16px"></p>
+    </div>
+    <aside class="inv brutal" aria-label="Inventory">
+      <div class="inv-h"><span>Inventory</span><span>Auto-updated</span></div>
+      <ul>
+        <li><i style="background:var(--c-games)"></i>Escape rooms<span class="dots"></span><b>4</b></li>
+        <li><i style="background:var(--c-installations)"></i>Cyber security<span class="dots"></span><b>2</b></li>
+        <li><i style="background:var(--c-digital)"></i>Pop culture<span class="dots"></span><b>1</b></li>
+        <li><i style="background:var(--c-hacks)"></i>History<span class="dots"></span><b>1</b></li>
+      </ul>
+      <hr>
+      <p>Known weakness: forgetting to ask the facilitator for the start code.</p>
+    </aside>
+  </section>
+
+  <section id="games" aria-labelledby="gh">
+    <div class="sec-h"><h2 id="gh">The missions</h2><span class="mono">4 games · play any</span></div>
+    <ul class="grid" id="list"></ul>
+  </section>
+
+  <section id="how" aria-labelledby="hh" class="how-wrap">
+    <div class="sec-h" style="margin-top:64px"><h2 id="hh">How it works</h2><span class="mono">for facilitators</span></div>
+    <div class="how" style="margin-top:0">
+      <div class="brutal"><span class="step">STEP 1</span><h3>Make teams</h3><p>Groups of 3 or 4 work best. Give each person a role and rotate it halfway.</p></div>
+      <div class="brutal"><span class="step">STEP 2</span><h3>Set the clock</h3><p>Each game asks the facilitator for a start code and lets you choose the round timer.</p></div>
+      <div class="brutal"><span class="step">STEP 3</span><h3>Solve the clues</h3><p>Teams read text clue cards, crack each puzzle in any order and collect secret letters or digits.</p></div>
+      <div class="brutal"><span class="step">STEP 4</span><h3>Debrief</h3><p>Finish with a quick chat: what was the trickiest clue and what did we learn?</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site"><div class="wrap"><span>MADE by <a href="https://www.abhijithgiridhar.com" target="_blank" rel="noopener">Abhijith Giridhar</a></span><span>Start codes and answer keys come from your facilitator ▸</span></div></footer>
+
+<script>
+const GAMES = [
+  {title:'Operation Lockdown', tag:'Cyber security', color:'--c-digital', diff:4, blurb:'ShadowByte has hacked the school network. Crack weak passwords, spot phishing, decode secrets and trace files by their metadata.', chips:['6 stations','15–25 min','Grade 6–8','Teams of 3–4'], url:'https://abhijithgiridhar.github.io/cyber-escape-room/'},
+  {title:'Hogwarts Cyber Mystery', tag:'Cyber security', color:'--c-games', diff:2, blurb:'The Hex-Hacker has locked the castle computers. Harry, Hermione, the Famous Five and the Secret Seven need your help. A gentler cyber security round.', chips:['6 stations','20 min','Grade 6–7','Teams of 3–4'], url:'https://abhijithgiridhar.github.io/cyber-escape-room1/'},
+  {title:'The Great Trophy Heist', tag:'Pop culture', color:'--c-hacks', diff:2, blurb:'The golden trophy vanished before the Bengaluru final. Follow the Metro, add up a dosa bill, read the scorecard and catch the Googly Ghost.', chips:['6 clues','20 min','Grade 6–8','Teams of 3–4'], url:'https://abhijithgiridhar.github.io/trophy-heist-escape-room/'},
+  {title:'Operation Hut Six', tag:'History', color:'--c-installations', diff:5, blurb:'Bletchley Park, 1941. Decode Morse, break a cipher, plan a convoy and catch a spy. Seven tough codes and no hints.', chips:['7 codes','30 min','Grade 7–8','No hints'], url:'https://abhijithgiridhar.github.io/operation-hut-six-escape-room/'}
+];
+const $=s=>document.querySelector(s);
+$('#list').innerHTML=GAMES.map((g,i)=>`<li><a class="card brutal lift" href="${g.url}"><header class="band" style="background:var(${g.color})"><span>No. ${String(i+1).padStart(3,'0')}</span><span>${g.tag}</span></header><div class="body"><h3>${g.title}</h3><p>${g.blurb}</p><div class="diff"><span>Difficulty</span><span class="pips" aria-label="${g.diff} out of 5">${[1,2,3,4,5].map(n=>`<i class="${n<=g.diff?'on':''}"></i>`).join('')}</span></div><ul class="chips">${g.chips.map(c=>`<li>${c}</li>`).join('')}</ul></div><div class="play"><span>▶ Play_</span><span>→</span></div></a></li>`).join('');
+
+/* palette switcher (remembers choice when allowed) */
+const PALS=['synth','arcade','dmg','blueprint'];
+let pal='synth';
+try{const s=localStorage.getItem('palette-escape');if(PALS.includes(s))pal=s;}catch(e){}
+function setPal(p){pal=p;document.documentElement.dataset.palette=p;$('#palBtn').textContent='Palette: '+p;try{localStorage.setItem('palette-escape',p);}catch(e){}}
+setPal(pal);
+$('#palBtn').onclick=()=>setPal(PALS[(PALS.indexOf(pal)+1)%PALS.length]);
+
+/* d20 roll picks a random game */
+$('#rollBtn').onclick=()=>{
+  const n=1+Math.floor(Math.random()*20), g=GAMES[(n-1)%GAMES.length];
+  $('#roll').innerHTML='You rolled a '+n+'. Mission: <a href="'+g.url+'" style="color:var(--accent)">'+g.title+'</a> ▸';
+};
+</script>
+</body>
+</html>
