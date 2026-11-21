@@ -100,9 +100,9 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 <main id="top">
   <section class="hero">
     <div>
-      <div class="eyebrow">Player 1 · Classroom missions · LVL 6–8</div>
+      <div class="eyebrow">Player 1 · Classroom missions · LVL 4–8</div>
       <h1>Pick a <span class="mark">mission</span> and escape.</h1>
-      <p class="lede">Four escape rooms for grade 6 to 8. Crack codes, spot scams, solve mysteries and race the clock. Everything runs in the browser, so any laptop works.</p>
+      <p class="lede">Five escape rooms for grade 4 to 8. Crack codes, spot scams, solve mysteries and race the clock. Everything runs in the browser, so any laptop works.</p>
       <div class="btns">
         <a class="btn brutal-sm lift primary" href="#games">▶ Choose a game_</a>
         <button class="btn brutal-sm lift" id="rollBtn" type="button">⚄ Roll a d20</button>
@@ -112,9 +112,9 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     <aside class="inv brutal" aria-label="Inventory">
       <div class="inv-h"><span>Inventory</span><span>Auto-updated</span></div>
       <ul>
-        <li><i style="background:var(--c-games)"></i>Escape rooms<span class="dots"></span><b>4</b></li>
+        <li><i style="background:var(--c-games)"></i>Escape rooms<span class="dots"></span><b>5</b></li>
         <li><i style="background:var(--c-installations)"></i>Cyber security<span class="dots"></span><b>2</b></li>
-        <li><i style="background:var(--c-digital)"></i>Pop culture<span class="dots"></span><b>1</b></li>
+        <li><i style="background:var(--c-digital)"></i>Pop culture<span class="dots"></span><b>2</b></li>
         <li><i style="background:var(--c-hacks)"></i>History<span class="dots"></span><b>1</b></li>
       </ul>
       <hr>
@@ -123,7 +123,7 @@ footer.site .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   </section>
 
   <section id="games" aria-labelledby="gh">
-    <div class="sec-h"><h2 id="gh">The missions</h2><span class="mono">4 games · play any</span></div>
+    <div class="sec-h"><h2 id="gh">The missions</h2><span class="mono">5 games · play any</span></div>
     <ul class="grid" id="list"></ul>
   </section>
 
@@ -145,6 +145,7 @@ const GAMES = [
   {title:'Operation Lockdown', tag:'Cyber security', color:'--c-digital', diff:4, blurb:'ShadowByte has hacked the school network. Crack weak passwords, spot phishing, decode secrets and trace files by their metadata.', chips:['6 stations','15–25 min','Grade 6–8','Teams of 3–4'], url:'https://abhijithgiridhar.github.io/cyber-escape-room/'},
   {title:'Hogwarts Cyber Mystery', tag:'Cyber security', color:'--c-games', diff:2, blurb:'The Hex-Hacker has locked the castle computers. Harry, Hermione, the Famous Five and the Secret Seven need your help. A gentler cyber security round.', chips:['6 stations','20 min','Grade 6–7','Teams of 3–4'], url:'https://abhijithgiridhar.github.io/cyber-escape-room1/'},
   {title:'The Great Trophy Heist', tag:'Pop culture', color:'--c-hacks', diff:2, blurb:'The golden trophy vanished before the Bengaluru final. Follow the Metro, add up a dosa bill, read the scorecard and catch the Googly Ghost.', chips:['6 clues','20 min','Grade 6–8','Teams of 3–4'], url:'https://abhijithgiridhar.github.io/trophy-heist-escape-room/'},
+  {title:'Trophy Heist: Pen & Paper', tag:'Offline', color:'--c-games', diff:1, blurb:'No screens needed. Students draw the suspects, then use their own drawings to catch the thief. Printable packs and a 60-minute plan.', chips:['Print &amp; play','60 min','Grade 4–5','Draw + solve'], url:'https://abhijithgiridhar.github.io/trophy-heist-escape-room/pen-and-paper/'},
   {title:'Operation Hut Six', tag:'History', color:'--c-installations', diff:5, blurb:'Bletchley Park, 1941. Decode Morse, break a cipher, plan a convoy and catch a spy. Seven tough codes and no hints.', chips:['7 codes','30 min','Grade 7–8','No hints'], url:'https://abhijithgiridhar.github.io/operation-hut-six-escape-room/'}
 ];
 const $=s=>document.querySelector(s);
